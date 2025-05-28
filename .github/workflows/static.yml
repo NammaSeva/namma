@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Namma Seva Kendra</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      color: #333;
+    }
+    header {
+      background-color: #c62828;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    section {
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .services ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .services li {
+      background: #ffffff;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .contact {
+      background: #f0f0f0;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    footer {
+      background: #222;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+    .map iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      border-radius: 8px;
+    }
+    .photo {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .photo img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+    }
+    .download {
+      margin-top: 20px;
+    }
+    .download a {
+      display: inline-block;
+      background-color: #2e7d32;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Namma Seva Kendra</h1>
+    <p>Your Trusted Digital Services Hub</p>
+  </header>  <section class="photo">
+    <img src="office-photo.jpg" alt="Office Front View">
+  </section>  <section class="services">
+    <h2>Our Services</h2>
+    <ul>
+      <li>Aadhaar Updates & Reprint</li>
+      <li>PAN Card Applications</li>
+      <li>Electricity / Water / Gas Bill Payments</li>
+      <li>Mobile & DTH Recharge</li>
+      <li>AEPS Banking Services</li>
+      <li>Government Schemes & Insurance</li>
+      <li>Train & Bus Ticket Booking</li>
+      <li>Voter ID Services & More</li>
+    </ul>
+  </section>  <section>
+    <h2>About Us</h2>
+    <p>At Namma Seva Kendra, our mission is to bring essential government and financial services closer to the people. Located in the heart of Bengaluru, we pride ourselves on delivering fast, friendly, and secure services for individuals and families.</p>
+  </section>  <section class="download">
+    <h2>Download Aadhaar Forms</h2>
+    <a href="https://uidai.gov.in/images/aadhaar_enrolment_correction_form_version_2.1.pdf" target="_blank">Aadhaar Correction Form</a>
+    <a href="https://uidai.gov.in/images/UpdateRequestFormV2.pdf" target="_blank">Update Request Form</a>
+  </section>  <section class="contact">
+    <h2>Contact Us</h2>
+    <p><strong>Phone / WhatsApp:</strong> <a href="https://wa.me/918592060826">+91 8592060826</a></p>
+    <p><strong>Email:</strong> <a href="mailto:sagroups26@gmail.com">sagroups26@gmail.com</a></p>
+    <p><strong>Location:</strong> Field Marshal Cariappa Rd, Shanthala Nagar, Ashok Nagar, Bengaluru</p>
+  </section>  <section class="map">
+    <h2>Find Us on the Map</h2>
+    <iframe src="https://maps.google.com/maps?q=12.971036,77.604743&z=15&output=embed"></iframe>
+  </section>  <footer>
+    &copy; 2025 Namma Seva Kendra. All Rights Reserved.
+  </footer>
+</body>
+</html># Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
